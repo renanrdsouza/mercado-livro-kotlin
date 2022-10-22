@@ -1,42 +1,43 @@
 package com.mercadolivro.service
 
 import com.mercadolivro.model.CustomerModel
+import com.mercadolivro.repository.CustomerRepository
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Service
 
 @Service
-class CustomerService() {
-
-    val customers = mutableListOf<CustomerModel>()
+class CustomerService(
+    val customerRepository: CustomerRepository
+) {
 
     fun getAll(name: String?): List<CustomerModel> {
         name?.let {
-            return customers.filter { it.name.contains(name, true) }
+            return customerRepository.findByNameContaining(name)
         }
-        return customers
+        return customerRepository.findAll()
     }
 
-    fun getCustomer(id: String): CustomerModel {
-        return customers.filter { it.id == id.toLong() }.first()
+    fun getCustomer(id: Long): CustomerModel {
+        return customerRepository.findById(id).get()
     }
 
     fun create(customer: CustomerModel) {
-        val id = if (customers.isEmpty()) {
-            1
-        } else {
-            customers.last().id!! + 1
-        }
-
-        customers.add(customer)
+        customerRepository.save(customer)
     }
 
     fun update(customer: CustomerModel) {
-        customers.filter { it.id == customer.id }.first().let {
-            it.name = customer.name
-            it.email = customer.email
+        if (!customerRepository.existsById(customer.id!!)) {
+            throw Exception()
         }
+
+        customerRepository.save(customer)
     }
 
-    fun delete(id: String) {
-        customers.removeIf { it.id == id.toLong() }
+    fun delete(id: Long) {
+        if (!customerRepository.existsById(id)) {
+            throw Exception()
+        }
+
+        customerRepository.deleteById(id)
     }
 }
