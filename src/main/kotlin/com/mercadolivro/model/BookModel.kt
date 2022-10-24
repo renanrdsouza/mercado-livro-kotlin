@@ -9,7 +9,7 @@ class BookModel(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long? = null,
 
     @Column
     val name: String,
@@ -19,7 +19,7 @@ class BookModel(
 
     @Column
     @Enumerated(EnumType.STRING) // fala para o spring que esse valor é um ENUM
-    val status: BookStatus? = null,
+    var status: BookStatus? = null,
 
     @ManyToOne
     @JoinColumn(name = "customer_id")

@@ -2,7 +2,6 @@ package com.mercadolivro.service
 
 import com.mercadolivro.model.CustomerModel
 import com.mercadolivro.repository.CustomerRepository
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Service
 
 @Service
@@ -17,7 +16,7 @@ class CustomerService(
         return customerRepository.findAll()
     }
 
-    fun getCustomer(id: Long): CustomerModel {
+    fun getById(id: Long): CustomerModel {
         return customerRepository.findById(id).get()
     }
 
