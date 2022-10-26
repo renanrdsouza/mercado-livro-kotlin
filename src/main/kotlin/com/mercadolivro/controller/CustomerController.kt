@@ -30,7 +30,7 @@ class CustomerController(
 
     @GetMapping("/{id}")
     fun getCustomer(@PathVariable id: Long): CustomerModel {
-        return customerService.getById(id)
+        return customerService.findby(id)
     }
 
     @PostMapping
@@ -42,7 +42,8 @@ class CustomerController(
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun update(@PathVariable id: Long, @RequestBody request: PutCustomerRequest) {
-        customerService.update(request.toCustomerModel(id))
+        val customerSaved = customerService.findby(id)
+        customerService.update(request.toCustomerModel(customerSaved))
     }
 
     @DeleteMapping("/{id}")

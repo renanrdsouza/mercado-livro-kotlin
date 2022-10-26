@@ -17,11 +17,28 @@ class BookModel(
     @Column
     val price: BigDecimal,
 
-    @Column
-    @Enumerated(EnumType.STRING) // fala para o spring que esse valor é um ENUM
-    var status: BookStatus? = null,
-
     @ManyToOne
     @JoinColumn(name = "customer_id")
     val customer: CustomerModel? = null
-)
+) {
+
+    @Column
+    @Enumerated(EnumType.STRING) // fala para o spring que esse valor é um ENUM
+    var status: BookStatus? = null
+        set(value) {
+            if (field == BookStatus.DELETADO || field == BookStatus.CANCELADO)
+                throw Exception("Não é possível cancelar um livro com status $field")
+
+            field = value
+        }
+
+    constructor(
+        id: Long? = null,
+        name: String,
+        price: BigDecimal,
+        customer: CustomerModel? = null,
+        status: BookStatus?
+    ): this(id, name, price, customer) {
+        this.status = status
+    }
+}
