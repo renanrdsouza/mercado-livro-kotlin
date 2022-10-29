@@ -10,4 +10,6 @@ spring:
     url: jdbc:mysql://localhost:3307/mercadolivro?createDatabaseIfNotExist=true
     username: root
     password: root
+  jackson:
+    default-property-inclusion: non_null
 #spring.jpa.show-sql: true
