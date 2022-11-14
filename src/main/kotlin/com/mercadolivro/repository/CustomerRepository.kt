@@ -9,4 +9,5 @@ interface CustomerRepository : JpaRepository<CustomerModel, Long> {
 
     fun findByNameContaining(name: String): List<CustomerModel>
     fun existsByEmail(email: String): Boolean
+    fun findByEmail(email: String): CustomerModel?
 }
