@@ -37,7 +37,7 @@ class JwtUtil {
 
     private fun getClaims(token: String): Claims {
         try {
-            return Jwts.parser().setSigningKey(secret!!.toByteArray()).parseClaimsJwt(token).body
+            return Jwts.parser().setSigningKey(secret!!.toByteArray()).parseClaimsJws(token).body
         } catch (ex: Exception) {
             throw AuthenticationException("Invalid token.", "999999")
         }

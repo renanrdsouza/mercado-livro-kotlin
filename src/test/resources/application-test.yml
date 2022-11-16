@@ -1,0 +1,18 @@
+spring:
+  profiles:
+    active: test
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/mercadolivro?createDatabaseIfNotExist=true
+    username: root
+    password: root
+  jackson:
+    default-property-inclusion: non_null
+#spring.jpa.show-sql: true
+
+jwt:
+  secret: fcdf83ad-7066-4e21-b8cf-f621c480c598
+  expiration: 999999
