@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/purchases")
 class PurchaseController(
-    val purchaseService: PurchaseService,
+    private val purchaseService: PurchaseService,
     private val purchaseMapper: PurchaseMapper
 ) {
 
