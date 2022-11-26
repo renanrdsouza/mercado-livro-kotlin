@@ -27,13 +27,14 @@ dependencies {
 	implementation("org.flywaydb:flyway-core:7.2.0")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("io.jsonwebtoken:jjwt:0.9.1")
-	testImplementation("io.mockk:mockk:1.13.2")
 
 	implementation("io.springfox:springfox-swagger2:3.0.0")
 	implementation("io.springfox:springfox-swagger-ui:3.0.0")
 	implementation("io.springfox:springfox-boot-starter:3.0.0")
 
 	runtimeOnly("mysql:mysql-connector-java")
+	testImplementation("org.springframework.security:spring-security-test:5.5.2")
+	testImplementation("io.mockk:mockk:1.13.2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
